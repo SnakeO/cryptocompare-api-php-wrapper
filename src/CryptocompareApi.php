@@ -56,7 +56,7 @@ class CryptocompareApi
         $this->setApiKey($apiKey);
         $this->setDebug($debug);
 
-        $this->httpClient = new Client(['verify' => false]);
+        $this->httpClient = new HttpClient(['verify' => false]);
     }
 
     /**
