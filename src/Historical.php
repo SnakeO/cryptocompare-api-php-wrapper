@@ -15,7 +15,6 @@ namespace Cryptocompare;
 class Historical extends CryptocompareApi
 {
     /**
-     * @param string $tryConversion
      * @param string $fsym
      * @param string $tsym
      * @param string $e
@@ -27,22 +26,20 @@ class Historical extends CryptocompareApi
      * @throws InvalidRequest
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getDataHistoday($tryConversion = "true", $fsym = "BTC", $tsym = "EUR", $e = "CCCAGG", $sign = "false", $aggregate = 1, $limit = 1440, $toTs = NULL) {
+    public function getDataHistoday($fsym = "BTC", $tsym = "EUR", $e = "CCCAGG", $sign = false, $aggregate = 1, $limit = 2000, $toTs = NULL) {
         $extraParams = $this->appplicationName;
 
         $params = array(
-            "tryConversion" => $tryConversion,
             "fsym" => $fsym,
             "tsym" => $tsym,
             "e" => $e,
             "extraParams" => $extraParams,
-            "sign" => $sign,
+            "sign" => $sign ? "true" : "false",
             "aggregate" => $aggregate,
             "limit" => $limit,
             "toTs" => $toTs,
         );
-        $r = $this->getRequest(CryptocompareApi::PUB, "/data/histoday", $params);
-        return $r;
+        return $this->getRequest(CryptocompareApi::PUB, "/data/exchange/symbol/histoday", $params);
     }
 
     /**
